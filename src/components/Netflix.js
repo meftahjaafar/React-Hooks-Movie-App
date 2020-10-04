@@ -1,105 +1,20 @@
 import React, { Component } from 'react'
+ import {Route} from 'react-router-dom';
 import MovieList from './movieList';
-//import SearchMovie from './searchMovie';
 import SearchRating from './searchRating';
-import picture1 from '../assets/Popular on Netflix/p1.PNG';
-import picture2 from '../assets/Popular on Netflix/p2.PNG';
-import picture3 from '../assets/Popular on Netflix/p3.PNG';
-import picture4 from '../assets/Popular on Netflix/p4.PNG';
-import picture5 from '../assets/Popular on Netflix/p5.PNG';
-import picture6 from '../assets/Popular on Netflix/p6.PNG';
-import picture7 from '../assets/Popular on Netflix/p7.PNG';
-import picture8 from '../assets/Popular on Netflix/p8.PNG';
-import picture9 from '../assets/Popular on Netflix/p9.PNG';
-import picture10 from '../assets/Popular on Netflix/p10.PNG';
-import picture11 from '../assets/Popular on Netflix/p11.PNG';
-import picture12 from '../assets/Popular on Netflix/p12.PNG';
-import logo from '../assets/logo/logo.PNG'
 import './Netflix.css';
+import logo from '../assets/logo/logo.PNG'
+import MovieShow from './movirShow'
 
-// ----------Data-------------//
 
-const movies = [
-    {
-      picture: picture1 ,
-      title: 'The Road Trick',
-      date: '2017',
-      rating: 4
-    },
-    {
-      picture: picture2 ,
-      title: 'Wynonna Earp',
-      date: '2016',
-      rating: 5
-    },
-    {
-      picture: picture3 ,
-      title: 'Club De Cuervos',
-      date: '2015',
-      rating: 4
-    },
-    {
-      picture: picture4 ,
-      title: 'Greys Anatomy',
-      date: '2005',
-      rating: 5
-    },
-    {
-      picture: picture5 ,
-      title: 'The Streets Step Up 2',
-      date: '2008',
-      rating: 3
-    },
-    {
-      picture: picture6 ,
-      title: 'Liquid Science',
-      date: '2017',
-      rating: 1
-    },
-    {
-      picture: picture7 ,
-      title: '13 Reasons Why',
-      date: '2017',
-      rating: 5
-    },
-    {
-      picture: picture8 ,
-      title: 'The StairCase',
-      date: '2018',
-      rating: 4
-    },
-    {
-      picture: picture9 ,
-      title: 'The Vietnam War',
-      date: '2020',
-      rating: 3
-    },
-    {
-      picture: picture10 ,
-      title: 'The Cavenant',
-      date: '2020',
-      rating: 2
-    },
-    {
-      picture: picture11 ,
-      title: 'Marcella',
-      date: '2014',
-      rating: 5
-    },
-    {
-      picture: picture12 ,
-      title: 'Riverdale',
-      date: '2016',
-      rating: 1
-    },
-  ]
 
-  export default class Netflix extends Component {
+export default class Netflix extends Component {
     // ------------ Constructor ------------ //
     constructor(props) {
       super(props)
       this.state = {
-        movieadded: movies,
+        movieadded: props.movies,
+        match: props.match,
         picture: '',
         title: '',
         date: '',
@@ -138,26 +53,12 @@ const movies = [
         stars: clicked
       })
     }
-   /* SearchRating = ({ rate, starClicked }) => {
-        return (
-            <div>
-                {Array.from({ length: 5 }, (star, i) => (
-                    <span onClick={() => { starClicked(i + 1) }}>
-                        {i < rate ? "★" : "☆"}
-                    </span>
-                ))}
-            </div>
-        );
-    }
-    { this.SearchRating(this.state.stars, this.rater) } 
-    */
+
 
     // ------------ Rendering ------------ //
     render() {
       return (
-  
-        <div class="wrapper">
-
+        <div to="/" class="wrapper">
           <header>
           <div class="netflixLogo">
            <a id="logo" href="#home">
@@ -189,6 +90,8 @@ const movies = [
           <h1 id="home">Popular on Netflix</h1>
           <div class="list">
           <MovieList list={this.state.movieadded.filter(movie => movie.rating >= this.state.stars).filter(el => el.title.toLowerCase().includes(this.state.searchText.toLowerCase()))} change={this.changeInput} new={this.newMovie} rating={this.state.rating} />
+          <Route path={`${this.state.match.url}/:movietitle`} render={routerProps => <MovieShow  {...routerProps} movies={this.state.movieadded} /> }/>
+
           </div>
           </div>
         
@@ -222,7 +125,7 @@ const movies = [
          </footer>
          </section>
           
-        </div>
+         </div>
       )
     }
   }

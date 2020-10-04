@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Netflix.css'
 import Rating from './rating';
 
+
 export default class MovieCard extends Component {
     render() {
         return (
@@ -9,9 +10,8 @@ export default class MovieCard extends Component {
             <Rating movieRating={this.props.movie.rating}/>
             <img src={this.props.movie.picture} alt={this.props.movie.title} className="picture"/>
             <h2 className="title">{this.props.movie.title}</h2>
-            <h4 className="date">{this.props.movie.date}</h4>
-            
-        </div>
+            <h4 className="date">{this.props.movie.date}</h4>  
+    </div>    
     )
   }
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MovieCard from './movieCard';
 import AddMovie from './addMovie';
 import './movieList.css'
+import {Link} from 'react-router-dom'
 
 
 export default class MovieList extends Component {
@@ -27,7 +28,7 @@ export default class MovieList extends Component {
             <div>
                 <div className="list">
                     {this.props.list.map(el => (
-                        <a href="#"><MovieCard movie={el} /></a>
+                        <Link  key={el.title} to={`/movies/${el.title}`}><MovieCard movie={el} key={el.title} /></Link>
                     ))}
                     <AddMovie onAdd={this.addOne} />
                 </div>
